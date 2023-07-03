@@ -1,0 +1,382 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+
+            <div class="row">
+                <div class="main col-12">
+                    <div class="row">
+                        <div class="col-9">
+                            {% for post in last_posts|slice:":1" %}
+
+                                <div class="top-news bg-body-secondary">
+                                    <div class="top-news_big col-12">
+                                        <a href="{% url 'news_detail' post.id %}">
+
+                                        </a>
+                                        <div class="row">
+                                            <div class="big-news_img col-6">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                            </div>
+
+                                            <div class="big-news_content col-6" style="margin-top: 20px;">
+                                                <div class="col text-secondary" style="font-size: small;">
+                                                    <i class="bi bi-calendar4-event"></i>
+                                                    <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+                                                </div>
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <h2>{{ post.title }}</h2>
+                                                    <p style="width: 420px;">{{ post.short_description }}</p>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+                            <div class="col-12 top-news_small-items">
+                                <div class="row">
+                                    {% for last_post in last_posts|slice:"1:" %}
+                                        <div class="col-6 small-news">
+                                            <div class="row">
+                                                <div>
+                                                    <div class="small-news_img col-4 my-2">
+                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                            <img src="{{ last_post.image.url }}"
+                                                                 alt="smallimg">
+                                                        </a>
+
+                                                    </div>
+                                                    <div class="small-news_content col-8">
+                                                        <div class="col text-secondary mb-1" style="font-size: small">
+                                                            <i class="bi bi-calendar4-event"></i>
+                                                            <span>{{ last_post.created_at|date:"H:m" }} / {{ last_post.created_at|date:"d.m.Y" }}</span>
+                                                        </div>
+                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                            <p><b>{{ last_post.title }}</b></p>
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+                                <br><br>
+
+
+                                <div>
+                                    <div class="block-title row">
+                                        <a href="{% url 'chosen' %}" class="firs"><span>Muharrir tanlovi</span></a>
+                                    </div>
+
+                                    <div class="row">
+                                        {% for post in chosen %}
+                                            <div class="col-4">
+                                                <div class="news">
+                                                    <a href="{% url 'news_detail' post.id %}">
+                                                        <img src="{{ post.image.url }}"
+                                                             alt="img">
+                                                    </a>
+
+                                                    <a href="{% url 'news_detail' post.id %}"
+                                                       class="news_title">{{ post.title }}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <br><br><br>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-3 new_title">
+
+                            <div class="row col-12">
+                                {% include 'layouts/sidebar.html' %}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="block-title row">
+                                <a href="{% url 'breaking_news' %}" class="firs"><span>Dolzarb xabarlar</span></a>
+                            </div>
+                            <div class="col-6">
+
+                                <div class="row">
+                                    {% for breaking_new in breaking_news|slice:":1" %}
+                                        <div>
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' breaking_new.id %}">
+                                                    <img src="{{ breaking_new.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' breaking_new.id %}"
+                                                   class="news_title">{{ breaking_new.title }}</a>
+                                                <br><br>
+                                                <a href="{% url 'news_detail' breaking_new.id %}">
+                                                    <p style="font-size: 14px; line-height: 25px;">{{ breaking_new.short_description }}</p>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    {% for post in breaking_news|slice:"1:" %}
+                                        <div class="col-6">
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' post.id %}"
+                                                   class="news_title">{{ post.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <br><br>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="block-title row">
+                                <a href="{% url 'interviews' %}" class="firs"><span>Intervyu</span></a>
+                            </div>
+                            <div>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        {% for post in interviews %}
+                                            <div class="col-3">
+                                                <div class="news">
+                                                    <a href="{% url 'news_detail' post.id %}">
+                                                        <img src="{{ post.image.url }}"
+                                                             alt="img">
+                                                    </a>
+
+                                                    <a href="{% url 'news_detail' post.id %}"
+                                                       class="news_title">{{ post.title }}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <br><br><br><br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="block-title row">
+                                <a href="{% url 'inquiries' %}" class="firs"><span>Kun.uz surishtiruvi</span></a>
+                            </div>
+                            <div class="col-6">
+
+                                <div class="row">
+                                    {% for news in inquiries|slice:":1" %}
+                                        <div>
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' news.id %}">
+                                                    <img src="{{ news.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <br><br>
+                                                <a href="{% url 'news_detail' news.id %}" class="news_title"
+                                                   style="font-size: larger; line-height: 35px;">{{ news.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <br><br><br>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    {% for post in inquiries|slice:"1:" %}
+                                        <div class="col-12">
+
+                                            <div class="news">
+                                                <div class="col-3">
+                                                    <a href="{% url 'news_detail' post.id %}">
+                                                        <img src="{{ post.image.url }}"
+                                                             alt="img">
+                                                    </a>
+
+                                                </div>
+                                                <div class="col-9" style="margin-top: 13px; margin-left: 11px">
+                                                    <a href="{% url 'news_detail' post.id %}"
+                                                       class="news_title">{{ post.title }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <br><br>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <div class="block-title row">
+                                <a href="{% url 'articles' %}" class="firs"><span>Maqolalar</span></a>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    {% for post in articles %}
+                                        <div class="col-4">
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' post.id %}" class="news_title"
+                                                   style="font-size: 15px;">{{ post.title }}</a>
+                                                <br><br>
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <p style="font-size: 14px; font-weight: lighter;">{{ post.short_description }}</p>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <br><br>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="logo">
+                                <a href="{% url 'ads' %}" class="navbar-brand">
+                                    <img src="{% static 'main/img/kun-uz-logo.svg' %}" alt="Bootstrap" width="30"
+                                         height="24">
+                                    <b style="font-size: 15px;">BIZNES</b>
+                                </a>
+                            </div>
+                            <div>
+                                <div class="col-12">
+                                    <div class="row mx-auto">
+                                        {% for post in ads %}
+                                            <div class="col-3 ">
+                                                <div class="news">
+                                                    <a href="{% url 'news_detail' post.id %}">
+                                                        <img src="{{ post.image.url }}"
+                                                             alt="img">
+                                                    </a>
+
+
+                                                    <a href="{% url 'news_detail' post.id %}"
+                                                       class="news_title">{{ post.title }}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <br><br><br><br>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <div class="col-6">
+                                <div class="block-title row">
+                                    <a href="{% url 'videonews' %}" class="firs"><span>Videoyangiliklar</span></a>
+                                </div>
+
+                                <div class="row">
+                                    {% for last_video_new in video_news|slice:":1" %}
+                                        <div>
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' last_video_new.id %}">
+                                                    <img src="{{ last_video_new.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' last_video_new.id %}"
+                                                   class="news_title">{{ last_video_new.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    {% for video_new in video_news|slice:"1:" %}
+                                        <div class="col-6">
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' video_new.id %}">
+                                                    <img src="{{ video_new.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' video_new.id %}"
+                                                   class="news_title">{{ video_new.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+                                <div class="block-title row">
+                                    <a href="{% url 'photonews' %}" class="firs"><span>Fotoyangiliklar</span></a>
+                                </div>
+
+                                <div class="row">
+                                    {% for last_photo_new in photo_news|slice:":1" %}
+                                        <div>
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' last_photo_new.id %}">
+                                                    <img src="{{ last_photo_new.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' last_photo_new.id %}"
+                                                   class="news_title">{{ last_photo_new.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    {% for photo_new in photo_news|slice:"1:" %}
+                                        <div class="col-6">
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' photo_new.id %}">
+                                                    <img src="{{ photo_new.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' photo_new.id %}"
+                                                   class="news_title">{{ photo_new.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

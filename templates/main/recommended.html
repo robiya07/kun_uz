@@ -1,0 +1,36 @@
+<div class="new_title" style="width: 300px;">
+
+    <div class="row col-12">
+        <div class="block-title row">
+            <a href="#" class="firs"><span>Tavsiya etamiz</span></a>
+        </div>
+        {% for post in news|slice:":4" %}
+            <div style="border: 1px solid #c9c8c8; padding: 10px; margin-top: 10px;">
+                <div class="col text-secondary mb-1" style="font-size: smaller">
+                    <i class="bi bi-calendar4-event"></i>
+                    <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+                </div>
+                <a href="{% url 'news_detail' post.id %}" style="color: #000000">
+                    <p style="font-size: small"><b>{{ post.title }}</b></p>
+                </a>
+
+            </div>
+        {% endfor %}
+
+        <div class="block-title row mt-3">
+            <a href="#" class="firs"><span>Ko'p o'qilganlar</span></a>
+        </div>
+        {% for post in news|slice:"4:" %}
+            <div style="border: 1px solid #c9c8c8; padding: 10px; margin-top: 10px;">
+                <div class="col text-secondary mb-1" style="font-size: smaller">
+                    <i class="bi bi-calendar4-event"></i>
+                    <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+                </div>
+                <a href="{% url 'news_detail' post.id %}" style="color: #000000">
+                    <p style="font-size: small"><b>{{ post.title }}</b></p>
+                </a>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>

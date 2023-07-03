@@ -1,0 +1,129 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+
+            <div class="row">
+                <div class="main col-12">
+                    <div class="row">
+                        <div class="col-9">
+                            {% for post in posts|slice:"1:2" %}
+
+                                <div class="top-news">
+                                    <div class="top-news_big col-12 bg-body-secondary">
+                                        <div class="row">
+
+                                            <div class="big-news_img col-6">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                            </div>
+
+                                            <div class="big-news_content col-6" style="margin-top: 20px;">
+                                                <div class="col text-secondary" style="font-size: small">
+                                                    <i class="bi bi-calendar4-event"></i>
+                                                    <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+                                                </div>
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <h2>{{ post.title }}</h2>
+                                                    <p style="width: 420px;">{{ post.short_description }}</p>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+                            <div class="col-12 top-news_small-items">
+
+
+                                <div class="row ">
+                                    {% for post in posts|slice:"2:5" %}
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' post.id %}"
+                                                   class="news_title">{{ post.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <br><br>
+
+                                {% for post in posts|slice:"5:" %}
+                                    <div class="card mb-3 rounded-0" style="max-width: 900px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}" class="img-fluid rounded-0"
+                                                         style="height: 210px; object-fit: cover;" alt="...">
+                                                </a>
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <div class="col text-secondary"
+                                                         style="font-size: small; margin-bottom: 7px;">
+                                                        <i class="bi bi-calendar4-event"></i>
+                                                        <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+                                                    </div>
+
+                                                    <a href='{% url 'news_detail' post.id %}'
+                                                       class="card-title h5"><b>{{ post.title }}</b></a>
+
+                                                    <a href="{% url 'news_detail' post.id %}" style="color: #2b3035">
+                                                        <p class="card-text mt-2"
+                                                           style="font-size: small;">
+
+                                                            {{ post.short_description }}
+                                                        </p>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-3 new_title">
+
+                            <div class="row col-12">
+                                <div class="block-title row">
+                                    <a href="{% url 'news_detail' posts.first.id %}" class="firs"><span
+                                            style="font-size: medium">{{ region.name }} ayni damda</span></a>
+                                </div>
+                                <div class="my-3">
+                                    <a href="{% url 'news_detail' posts.first.id %}">
+                                        <img src="{{ posts.first.image.url }}"
+                                             style="object-fit: cover; width: 100%; height: 100%;">
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <div class="row col-12">
+                                {% include 'layouts/sidebar.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

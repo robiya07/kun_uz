@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Kun.uz
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/col.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/carousel.css' %}">
+</head>
+<body>
+
+{% include 'layouts/navbar.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+{% include 'layouts/footer.html' %}
+
+<script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+{#<script src="{% static 'main/js/main.js' %}"></script>#}
+</body>
+</html>

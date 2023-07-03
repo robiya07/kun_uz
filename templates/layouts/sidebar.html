@@ -1,0 +1,18 @@
+<div class="block-title row">
+    <a href="#" class="firs"><span>So‘nggi yangiliklar</span></a>
+</div>
+{% for post in news %}
+    <div class="news-lenta">
+
+        <div class="col text-secondary" style="font-size: small">
+            <i class="bi bi-calendar4-event"></i>
+            <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+        </div>
+        <a href="{% url 'news_detail' post.id %}" style="color: #000000">
+            <p class="news-lenta_title" style="font-size: 13px; margin-top: 5px;">{{ post.title }}</p>
+        </a>
+
+
+    </div>
+{% endfor %}
+<a href="#" class="main-btn col-12"> Ko'proq yangiliklar </a>

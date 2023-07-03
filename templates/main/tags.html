@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-9">
+                <div class="bg-body-secondary">
+                    <p class="p-3">{{ tag }}</p>
+                </div>
+
+                <div class="row ">
+                    {% for post in news_t %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="news">
+                                <a href="{% url 'news_detail' post.id %}">
+                                    <img src="{{ post.image.url }}"
+                                         alt="img">
+                                </a>
+
+                                <a href="{% url 'news_detail' post.id %}" class="news_title">{{ post.title }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+
+            {% include 'main/recommended.html' %}
+        </div>
+    </div>
+{% endblock %}

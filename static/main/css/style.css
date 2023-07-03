@@ -1,0 +1,336 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.rek img {
+  width: 100%;
+}
+/* header */
+header {
+  margin: 20px 0;
+}
+.logo img {
+  width: 75px;
+  height: 30px;
+  margin-top: 0px;
+}
+ul {
+  list-style: none;
+}
+ul li {
+  display: inline;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+a {
+  text-decoration: none;
+  transition: all .3s;
+}
+
+.navbar {
+  margin-left: 15px;
+}
+.nav-item{
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 19px;
+  margin-left: 20px;
+}
+nav {
+  margin-top: 6px;
+}
+
+.nav-item a:hover {
+  color: blue;
+}
+
+.nav-item a {
+  color: black;
+}
+.covid-btn {
+  background-color: #D80943;
+  border-radius: 18.5px;
+  color: #fff;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 9px 20px 9px 40px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.covid-btn::after {
+  content: "";
+  background-color: #D80943;
+  background-image: url('https://kun.uz/assets/2ed6cdd/img/cell.svg');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 31px;
+  height: 31px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 18.5px;
+}
+
+ul li img {
+  margin-right: 6px;
+}
+
+.lang-wrapper {
+  border-radius: 16px;
+  border: 1px solid #17206A;
+  background-color: #fff;
+  padding: 6px 34px 6px 14px;
+  cursor: pointer;
+  color: #17206A;
+  font-size: 12px;
+  letter-spacing: .05;
+  font-weight: 300;
+  position: relative;
+}
+
+.lang-wrapper::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 2px;
+  margin: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('https://kun.uz/assets/2ed6cdd/img/down-arrow-border.svg');
+  width: 24px;
+  height: 24px;
+}
+
+.covid-block .img {
+  width: 46px;
+  height: 46px;
+  background: url('https://kun.uz/assets/2ed6cdd/img/virus.svg') no-repeat center;
+  background-size: contain;
+}
+
+.title {
+  margin-top: 5px;
+}
+
+.covid-block {
+  position: relative;
+}
+
+.covid-block::before {
+  content: "";
+  width: 1px;
+  height: 50px;
+  background-color: #d3d3d3;
+  position: absolute;
+  right: 10px;
+  top: 1;
+}
+
+.covid-block:last-child::before {
+  content: "";
+  width: 0;
+}
+
+.covid-block a {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #001088;
+}
+
+.text span {
+  padding: 10px 0 0 0;
+  margin-left: 10px;
+}
+
+.text span b {
+  font-weight: 400;
+  font-size: 28px;
+}
+
+.red {
+  color: red;
+  position: absolute;
+  top: 10px;
+}
+
+.covid-block .right img {
+  padding: 5px 20px 0 0;
+}
+
+.covid {
+  padding: 20px;
+  border: 1px solid #d3d3d3;
+}
+
+.main {
+  margin: 25px 0;
+}
+
+.top-news {
+  height: 350px;
+  background-color: #f2f2f2;
+}
+
+.top-news_big img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.big-news_content {
+  padding: 20px;
+}
+
+.big-news_content h2 {
+  font-size: 22px;
+  line-height: 27px;
+  color: #000;
+  font-weight: bold;
+  transition: .2s ease;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: block;
+}
+
+.news-meta {
+  margin-bottom: 10px;
+  opacity: .8;
+  color: #000;
+  font-size: 12px;
+  padding-left: 20px;
+  background: url('https://kun.uz/assets/2ed6cdd/img/calendar.svg') no-repeat center left;
+  background-size: contain;
+}
+
+.big-news_content p {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 26px;
+  color: #000;
+}
+
+.top-news_small-items {
+  margin: 20px 0 0 0;
+}
+.small-news {
+  margin-bottom: 20px;
+}
+
+.small-news_img {
+  width: 160px;
+  height: 108px;
+  min-width: 130px;
+  position: relative;
+  overflow: hidden;
+}
+
+.small-news_img img {
+  width: 100%;
+}
+
+.small-news_content {
+  padding: 10px;
+}
+
+.small-news_content p {
+  font-size: 14px;
+  line-height: 21px;
+  color: #000;
+  font-weight: 500;
+  transition: .2 ease;
+}
+
+.block-title span {
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  display: block;
+  padding-left: 25px;
+}
+
+.block-title span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8%;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: #001088;
+}
+.news:first-child {
+  padding-left: 0;
+}
+.news {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.news img {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.news a {
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+  transition: .2 ease;
+}
+
+.new_title {
+  margin-left: 20px;
+}
+
+.news-lenta {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #d3d3d3;
+  margin: 15px 0;
+}
+
+.news-lenta_title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  color: #000;
+  transition: .2s ease;
+  cursor: pointer;
+}
+
+a:hover, p:hover, h2:hover{
+  color: #001088;
+}
+
+.main-btn {
+  border: 1px solid #17206A;
+  color: #17206A;
+  text-align: center;
+  padding: 13px 40px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16px;
+  width: 100%;
+  transition: .3s ease;
+}
+
+.main-btn:hover {
+  background-color: #17206A;
+  color: #fff;
+}
+
+
+

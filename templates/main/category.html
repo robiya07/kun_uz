@@ -1,0 +1,114 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+
+            <div class="row">
+                <div class="main col-12">
+                    <div class="row">
+                        <div class="col-9">
+                            {% for post in posts_c|slice:":1" %}
+
+                                <div class="top-news">
+                                    <div class="top-news_big col-12 bg-body-secondary">
+                                        <div class="row">
+
+                                            <div class="big-news_img col-6">
+                                                <div class="block-title row"
+                                                     style="margin-left: 5px; margin-top: 5px; margin-bottom: 5px">
+                                                    <a href="{% url 'category' category.id %}"
+                                                       class="firs"><span>{{ category }}</span></a>
+                                                </div>
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                            </div>
+
+                                            <div class="big-news_content col-6" style="margin-top: 20px;">
+                                                <div class="col text-secondary" style="font-size: small">
+                                                    <i class="bi bi-calendar4-event"></i>
+                                                    <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
+                                                </div>
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <h2>{{ post.title }}</h2>
+                                                    <p style="width: 420px;">{{ post.short_description }}</p>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+                            <div class="col-12 top-news_small-items">
+
+                                <div class="row">
+                                    {% for last_post in posts_c|slice:"1:5" %}
+                                        <div class="col-6 small-news">
+                                            <div class="row">
+                                                <div>
+                                                    <div class="small-news_img col-4 my-2">
+                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                            <img src="{{ last_post.image.url }}"
+                                                                 alt="smallimg">
+                                                        </a>
+
+                                                    </div>
+                                                    <div class="small-news_content col-8">
+                                                        <div class="col text-secondary mb-1" style="font-size: small">
+                                                            <i class="bi bi-calendar4-event"></i>
+                                                            <span>{{ last_post.created_at|date:"H:m" }} / {{ last_post.created_at|date:"d.m.Y" }}</span>
+                                                        </div>
+                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                            <p><b>{{ last_post.title }}</b></p>
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+
+
+                                <div class="row ">
+                                    {% for post in posts_c|slice:"5:" %}
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="news">
+                                                <a href="{% url 'news_detail' post.id %}">
+                                                    <img src="{{ post.image.url }}"
+                                                         alt="img">
+                                                </a>
+
+                                                <a href="{% url 'news_detail' post.id %}"
+                                                   class="news_title">{{ post.title }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-3 new_title">
+
+                            <div class="row col-12">
+                                {% include 'layouts/sidebar.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
