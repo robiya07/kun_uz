@@ -8,11 +8,11 @@
             <i class="bi bi-calendar4-event"></i>
             <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
         </div>
-        <a href="{% url 'news_detail' post.id %}" style="color: #000000">
+        <a href="{% url 'news_detail' post.slug %}" style="color: #000000">
             <p class="news-lenta_title" style="font-size: 13px; margin-top: 5px;">{{ post.title }}</p>
         </a>
 
 
     </div>
 {% endfor %}
-<a href="#" class="main-btn col-12"> Ko'proq yangiliklar </a>
+<a href="{% url 'last-posts' 1 %}" class="main-btn col-12"> Ko'proq yangiliklar </a>

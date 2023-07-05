@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'main.utils.context_processors.header_view',
                 'main.utils.context_processors.last_news',
+                'main.utils.context_processors.active_navbar',
                 # 'main.utils.context_processors.recommended_view',
             ],
         },

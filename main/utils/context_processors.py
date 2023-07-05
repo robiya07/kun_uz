@@ -16,6 +16,18 @@ def last_news(request):
     return {'news': news}
 
 
+def active_navbar(request):
+    active_region = None
+    active_category = None
+    if 'region' in request.path:
+        active_region = request.path.split('/')[-2]
+    if 'category' in request.path:
+        active_category = request.path.split('/')[-2]
+    return {'active_region': active_region, 'active_category': active_category}
+
+
+
+
 # def recommended_view(request):
 #     more_views = NewsModel.objects.order_by('-hit_count_generic__hits')[:4]
 #     recommended = NewsModel.objects.order_by('-hit_count_generic__hits')[4:8]

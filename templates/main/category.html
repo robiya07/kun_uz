@@ -18,10 +18,10 @@
                                             <div class="big-news_img col-6">
                                                 <div class="block-title row"
                                                      style="margin-left: 5px; margin-top: 5px; margin-bottom: 5px">
-                                                    <a href="{% url 'category' category.id %}"
+                                                    <a href="{% url 'category' category.slug %}"
                                                        class="firs"><span>{{ category }}</span></a>
                                                 </div>
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <img src="{{ post.image.url }}"
                                                          alt="img">
                                                 </a>
@@ -33,7 +33,7 @@
                                                     <i class="bi bi-calendar4-event"></i>
                                                     <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
                                                 </div>
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <h2>{{ post.title }}</h2>
                                                     <p style="width: 420px;">{{ post.short_description }}</p>
                                                 </a>
@@ -53,7 +53,7 @@
                                             <div class="row">
                                                 <div>
                                                     <div class="small-news_img col-4 my-2">
-                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                        <a href="{% url 'news_detail' last_post.slug %}">
                                                             <img src="{{ last_post.image.url }}"
                                                                  alt="smallimg">
                                                         </a>
@@ -64,7 +64,7 @@
                                                             <i class="bi bi-calendar4-event"></i>
                                                             <span>{{ last_post.created_at|date:"H:m" }} / {{ last_post.created_at|date:"d.m.Y" }}</span>
                                                         </div>
-                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                        <a href="{% url 'news_detail' last_post.slug %}">
                                                             <p><b>{{ last_post.title }}</b></p>
                                                         </a>
 
@@ -84,12 +84,12 @@
                                     {% for post in posts_c|slice:"5:" %}
                                         <div class="col-md-6 col-lg-4">
                                             <div class="news">
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <img src="{{ post.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' post.id %}"
+                                                <a href="{% url 'news_detail' post.slug %}"
                                                    class="news_title">{{ post.title }}</a>
                                             </div>
                                         </div>
@@ -98,6 +98,8 @@
 
 
                             </div>
+
+
 
                         </div>
                         <div class="col-3 new_title">

@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
 
-</body>
-</html>
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-9">
+                <div class="block-title row bg-body-secondary p-2">
+                    <span>So'nggi yangiliklar</span>
+                </div>
+
+                <div class="row ">
+                    {% for post in last %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="news">
+                                <a href="{% url 'news_detail' post.slug %}">
+                                    <img src="{{ post.image.url }}"
+                                         alt="img">
+                                </a>
+
+                                <a href="{% url 'news_detail' post.slug %}"
+                                   class="news_title">{{ post.id }} {{ post.title }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <br><br>
+                {% if last.paginator.num_pages > 1 %}
+
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {% if not last.has_previous %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="{% if last.has_previous %} {% url 'last-posts' last.previous_page_number %}{% endif %} ">Previous</a>
+                            </li>
+
+                            {% if last.number|add:'-1' > 1 %}
+                                <li class="page-item disabled"><a class="page-link">&hellip;</a></li>
+                            {% endif %}
+
+                            {% for i in last.paginator.page_range %}
+                                {% if last.number == i %}
+                                    <li class="active page-item disabled"><a class="page-link" href="#">{{ i }}</a></li>
+                                {% elif i > last.number|add:'-2' and i < last.number|add:'2' %}
+                                    <li class="page-item"><a class="page-link"
+                                                             href="{% url 'last-posts' i %}">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if last.paginator.num_pages > last.number|add:'1' %}
+                                <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+                            {% endif %}
+
+                            <li class="page-item {% if not last.has_next %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="{% if last.has_next %} {% url 'last-posts' last.next_page_number %} {% endif %}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                {% endif %}
+
+            </div>
+
+            {% include 'main/recommended.html' %}
+        </div>
+    </div>
+{% endblock %}

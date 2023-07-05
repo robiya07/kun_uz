@@ -1,10 +1,10 @@
+from django.db.models import Q
 from django.shortcuts import render
-
+from django.core.paginator import Paginator, EmptyPage
 from main.models import CategoryModel, NewsModel, ZoneModel, TagModel
 
 
 # Create your views here.
-
 
 def home_view(request):
     last_posts = NewsModel.objects.all()[:5]
@@ -17,6 +17,17 @@ def home_view(request):
     video_news = NewsModel.objects.filter(is_video_news=True)[:3]
     photo_news = NewsModel.objects.filter(is_photo_news=True)[:3]
 
+    q = request.GET.get('q')
+    if q:
+        search_posts = NewsModel.objects.filter(Q(title__icontains=q) | Q(short_description__icontains=q))
+        context = {
+            'search_posts': search_posts,
+            'q': q
+        }
+        return render(request, 'main/tags.html', context)
+    else:
+        q = ''
+
     context = {
         'last_posts': last_posts,
         'chosen': chosen,
@@ -26,7 +37,8 @@ def home_view(request):
         'articles': articles,
         'ads': ads,
         'video_news': video_news,
-        'photo_news': photo_news
+        'photo_news': photo_news,
+        'q': q
     }
     return render(request, 'main/home.html', context)
 
@@ -62,8 +74,8 @@ def ads_view(request):
 
 
 def videonews_view(request):
-    video_news_list = NewsModel.objects.filter(is_video_news=True)
-    return render(request, 'main/home_categories.html', {'l': video_news_list})
+    vslugeo_news_list = NewsModel.objects.filter(is_vslugeo_news=True)
+    return render(request, 'main/home_categories.html', {'l': vslugeo_news_list})
 
 
 def photonews_view(request):
@@ -71,25 +83,45 @@ def photonews_view(request):
     return render(request, 'main/home_categories.html', {'l': photo_news_list})
 
 
-def region_view(request, pk):
-    posts = NewsModel.objects.filter(zone__id=pk)
-    region = ZoneModel.objects.get(id=pk)
+def region_view(request, slug):
+    posts = NewsModel.objects.filter(zone__slug=slug)
+    region = ZoneModel.objects.get(slug=slug)
     return render(request, 'main/region.html', {'posts': posts, 'region': region})
 
 
-def category_view(request, pk):
-    posts_c = NewsModel.objects.filter(category__id=pk)
-    category = CategoryModel.objects.get(id=pk)
+def category_view(request, slug):
+    posts_c = NewsModel.objects.filter(category__slug=slug)
+    category = CategoryModel.objects.get(slug=slug)
     return render(request, 'main/category.html', {'posts_c': posts_c, "category": category})
 
 
-def news_detail_view(request, pk):
-    news_det = NewsModel.objects.get(id=pk)
+def news_detail_view(request, slug):
+    news_det = NewsModel.objects.get(slug=slug)
     ads = NewsModel.objects.filter(is_ad=True)[:4]
     return render(request, 'main/news_detail.html', {'post_detail': news_det, 'ads': ads})
 
 
-def tags_view(request, pk):
-    tag = TagModel.objects.get(id=pk)
+def tags_view(request, slug, page):
+    tag = TagModel.objects.get(slug=slug)
     news_t = tag.news.all()
+
+    paginator = Paginator(news_t, 18)
+
+    try:
+        news_t = paginator.page(page)
+    except EmptyPage:
+        news_t = paginator.page(paginator.num_pages)
+
     return render(request, 'main/tags.html', {'news_t': news_t, 'tag': tag})
+
+
+def last_posts(request, page):
+    last = NewsModel.objects.all()
+    paginator = Paginator(last, 15)
+
+    try:
+        last = paginator.page(page)
+    except EmptyPage:
+        last = paginator.page(paginator.num_pages)
+
+    return render(request, 'main/last_posts.html', {'last': last})

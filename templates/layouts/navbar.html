@@ -13,18 +13,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {% for category in main_categories %}
-                    <li class="nav-item">
-                        <a class="nav-link" style="font-size: 90%"
-                           href="{% url 'category' category.id %}">{{ category.name }}</a>
+                    <li class="nav-item" {% if category.slug == active_category %}
+                        style="border-bottom: 3px solid #123ac5;"
+                    {% endif %}>
+                        <a class="nav-link" style="font-size: 90%;"
+                           href="{% url 'category' category.slug %}">{{ category.name }}</a>
                     </li>
                 {% endfor %}
 
 
             </ul>
-            <form class="d-flex" role="search" method="get">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
+            <form class="d-flex" role="search" method="get" action="{% url 'home' %}">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{ q }}"
                        name="q">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
         </div>
     </div>
@@ -34,7 +36,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <a class="navbar-brand" href="#">Hududlar</a>
+        <a class="navbar-brand">Hududlar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,8 +46,13 @@
                 <ul class="nav nav-underline">
                     {% for zone in zones %}
                         <li>
-                            <a href="{% url 'region' zone.id %}" class="text-secondary"
-                               style="font-size: 90%">{{ zone.name }}</a>
+                            {% if zone.slug == active_region %}
+                                <a href="{% url 'region' zone.slug %}" style="font-size: 90%; color: #0d05a9">{{ zone.name }}</a>
+                            {% else %}
+                                <a href="{% url 'region' zone.slug %}" class="text-secondary"
+
+                                   style="font-size: 90%;">{{ zone.name }}</a>
+                            {% endif %}
                         </li>
                     {% endfor %}
 

@@ -9,24 +9,76 @@
         <div class="row mt-5">
             <div class="col-9">
                 <div class="bg-body-secondary">
-                    <p class="p-3">{{ tag }}</p>
+                    {% if q %}
+                        <h4 class="p-3">"{{ q }}" bo'yicha natijalar:</h4>
+                    {% else %}
+                        <p class="p-3">{{ tag }}</p>
+                    {% endif %}
                 </div>
 
                 <div class="row ">
-                    {% for post in news_t %}
-                        <div class="col-md-6 col-lg-4">
-                            <div class="news">
-                                <a href="{% url 'news_detail' post.id %}">
-                                    <img src="{{ post.image.url }}"
-                                         alt="img">
-                                </a>
+                    {% if q %}
+                        {% for post in search_posts %}
+                            <div class="col-md-6 col-lg-4">
+                                <div class="news">
+                                    <a href="{% url 'news_detail' post.slug %}">
+                                        <img src="{{ post.image.url }}"
+                                             alt="img">
+                                    </a>
 
-                                <a href="{% url 'news_detail' post.id %}" class="news_title">{{ post.title }}</a>
+                                    <a href="{% url 'news_detail' post.slug %}" class="news_title">{{ post.title }}</a>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        {% for post in news_t %}
+                            <div class="col-md-6 col-lg-4">
+                                <div class="news">
+                                    <a href="{% url 'news_detail' post.slug %}">
+                                        <img src="{{ post.image.url }}"
+                                             alt="img">
+                                    </a>
+
+                                    <a href="{% url 'news_detail' post.slug %}" class="news_title">{{ post.title }}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
                 </div>
 
+                {% if news_t.paginator.num_pages > 1 %}
+                    <nav class="pt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {% if not news_t.has_previous %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="{% if news_t.has_previous %} {% url 'tags' tag news_t.previous_page_number %}{% endif %} ">Previous</a>
+                            </li>
+
+                            {% if news_t.number|add:'-1' > 1 %}
+                                <li class="page-item disabled"><a class="page-link">&hellip;</a></li>
+                            {% endif %}
+
+                            {% for i in news_t.paginator.page_range %}
+                                {% if news_t.number == i %}
+                                    <li class="active page-item disabled"><a class="page-link" href="#">{{ i }}</a></li>
+                                {% elif i > news_t.number|add:'-2' and i < news_t.number|add:'2' %}
+                                    <li class="page-item"><a class="page-link" href="{% url 'tags' tag i %}">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if news_t.paginator.num_pages > news_t.number|add:'1' %}
+                                <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+                            {% endif %}
+
+                            <li class="page-item {% if not news_t.has_next %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="{% if news_t.has_next %} {% url 'tags' tag news_t.next_page_number %} {% endif %}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                {% endif %}
 
             </div>
 

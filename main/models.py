@@ -2,10 +2,12 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.text import slugify
 
 
 class ZoneModel(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=300, blank=True)
 
     class Meta:
         verbose_name = 'Zone'
@@ -14,10 +16,30 @@ class ZoneModel(models.Model):
 
     def __str__(self):
         return self.name
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+            while NewsModel.objects.filter(slug=self.slug).exists():
+                slug = NewsModel.objects.filter(slug=self.slug).first().slug
+                if '-' in slug:
+                    try:
+                        if slug.split('-')[-1] in self.name:
+                            self.slug += '-1'
+                        else:
+                            self.slug = '-'.join(slug.split('-')[:-1]) + '-' + str(int(slug.split('-')[-1]) + 1)
+                    except:
+                        self.slug = slug + '-1'
+                else:
+                    self.slug += '-1'
+
+            super().save(*args, **kwargs)
 
 
 class CategoryModel(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=300, blank=True)
+
 
     class Meta:
         verbose_name = 'Category'
@@ -26,16 +48,34 @@ class CategoryModel(models.Model):
 
     def __str__(self):
         return self.name
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+            while NewsModel.objects.filter(slug=self.slug).exists():
+                slug = NewsModel.objects.filter(slug=self.slug).first().slug
+                if '-' in slug:
+                    try:
+                        if slug.split('-')[-1] in self.name:
+                            self.slug += '-1'
+                        else:
+                            self.slug = '-'.join(slug.split('-')[:-1]) + '-' + str(int(slug.split('-')[-1]) + 1)
+                    except:
+                        self.slug = slug + '-1'
+                else:
+                    self.slug += '-1'
+
+            super().save(*args, **kwargs)
 
 
 class NewsModel(models.Model):
-    title = models.CharField(max_length=255)
-    short_description = models.CharField(max_length=500, null=True, blank=True)
+    title = models.CharField(max_length=100)
+    short_description = models.CharField(max_length=310, null=True, blank=True)
     image = models.ImageField(upload_to='posts/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     content = RichTextUploadingField()
     video_url = models.URLField(max_length=255, null=True, blank=True)
-    zone = models.ForeignKey(ZoneModel, on_delete=models.RESTRICT)
+    zone = models.ForeignKey(ZoneModel, on_delete=models.RESTRICT, null=True, blank=True)
     category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, null=True, blank=True)
     is_chosen = models.BooleanField(default=False)
     is_interview = models.BooleanField(default=False)
@@ -45,8 +85,27 @@ class NewsModel(models.Model):
     is_ad = models.BooleanField(default=False)
     is_video_news = models.BooleanField(default=False)
     is_photo_news = models.BooleanField(default=False)
-    hit_count_generic = GenericRelation(HitCount, object_id_field='object_p',
-                                        related_query_name='hit_count_generic_relation')
+    slug = models.SlugField(max_length=300, blank=True)
+    hit_count_generic = GenericRelation(HitCount, object_id_field="id", related_query_name='hit_count_generic_relation')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+            while NewsModel.objects.filter(slug=self.slug).exists():
+                slug = NewsModel.objects.filter(slug=self.slug).first().slug
+                if '-' in slug:
+                    try:
+                        if slug.split('-')[-1] in self.title:
+                            self.slug += '-1'
+                        else:
+                            self.slug = '-'.join(slug.split('-')[:-1]) + '-' + str(int(slug.split('-')[-1]) + 1)
+                    except:
+                        self.slug = slug + '-1'
+                else:
+                    self.slug += '-1'
+
+            super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'News'
@@ -61,6 +120,7 @@ class NewsModel(models.Model):
 class TagModel(models.Model):
     name = models.CharField(max_length=50)
     news = models.ManyToManyField(NewsModel)
+    slug = models.SlugField(max_length=300, blank=True)
 
     class Meta:
         verbose_name = 'Tag'
@@ -69,3 +129,22 @@ class TagModel(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+            while NewsModel.objects.filter(slug=self.slug).exists():
+                slug = NewsModel.objects.filter(slug=self.slug).first().slug
+                if '-' in slug:
+                    try:
+                        if slug.split('-')[-1] in self.name:
+                            self.slug += '-1'
+                        else:
+                            self.slug = '-'.join(slug.split('-')[:-1]) + '-' + str(int(slug.split('-')[-1]) + 1)
+                    except:
+                        self.slug = slug + '-1'
+                else:
+                    self.slug += '-1'
+
+            super().save(*args, **kwargs)

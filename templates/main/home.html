@@ -13,12 +13,12 @@
 
                                 <div class="top-news bg-body-secondary">
                                     <div class="top-news_big col-12">
-                                        <a href="{% url 'news_detail' post.id %}">
+                                        <a href="{% url 'news_detail' post.slug %}">
 
                                         </a>
                                         <div class="row">
                                             <div class="big-news_img col-6">
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <img src="{{ post.image.url }}"
                                                          alt="img">
                                                 </a>
@@ -30,7 +30,7 @@
                                                     <i class="bi bi-calendar4-event"></i>
                                                     <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
                                                 </div>
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <h2>{{ post.title }}</h2>
                                                     <p style="width: 420px;">{{ post.short_description }}</p>
                                                 </a>
@@ -49,7 +49,7 @@
                                             <div class="row">
                                                 <div>
                                                     <div class="small-news_img col-4 my-2">
-                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                        <a href="{% url 'news_detail' last_post.slug %}">
                                                             <img src="{{ last_post.image.url }}"
                                                                  alt="smallimg">
                                                         </a>
@@ -60,7 +60,7 @@
                                                             <i class="bi bi-calendar4-event"></i>
                                                             <span>{{ last_post.created_at|date:"H:m" }} / {{ last_post.created_at|date:"d.m.Y" }}</span>
                                                         </div>
-                                                        <a href="{% url 'news_detail' last_post.id %}">
+                                                        <a href="{% url 'news_detail' last_post.slug %}">
                                                             <p><b>{{ last_post.title }}</b></p>
                                                         </a>
 
@@ -86,12 +86,12 @@
                                         {% for post in chosen %}
                                             <div class="col-4">
                                                 <div class="news">
-                                                    <a href="{% url 'news_detail' post.id %}">
+                                                    <a href="{% url 'news_detail' post.slug %}">
                                                         <img src="{{ post.image.url }}"
                                                              alt="img">
                                                     </a>
 
-                                                    <a href="{% url 'news_detail' post.id %}"
+                                                    <a href="{% url 'news_detail' post.slug %}"
                                                        class="news_title">{{ post.title }}</a>
                                                 </div>
                                             </div>
@@ -121,15 +121,15 @@
                                     {% for breaking_new in breaking_news|slice:":1" %}
                                         <div>
                                             <div class="news">
-                                                <a href="{% url 'news_detail' breaking_new.id %}">
+                                                <a href="{% url 'news_detail' breaking_new.slug %}">
                                                     <img src="{{ breaking_new.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' breaking_new.id %}"
+                                                <a href="{% url 'news_detail' breaking_new.slug %}"
                                                    class="news_title">{{ breaking_new.title }}</a>
                                                 <br><br>
-                                                <a href="{% url 'news_detail' breaking_new.id %}">
+                                                <a href="{% url 'news_detail' breaking_new.slug %}">
                                                     <p style="font-size: 14px; line-height: 25px;">{{ breaking_new.short_description }}</p>
                                                 </a>
 
@@ -144,12 +144,12 @@
                                     {% for post in breaking_news|slice:"1:" %}
                                         <div class="col-6">
                                             <div class="news">
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <img src="{{ post.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' post.id %}"
+                                                <a href="{% url 'news_detail' post.slug %}"
                                                    class="news_title">{{ post.title }}</a>
                                             </div>
                                         </div>
@@ -169,12 +169,12 @@
                                         {% for post in interviews %}
                                             <div class="col-3">
                                                 <div class="news">
-                                                    <a href="{% url 'news_detail' post.id %}">
+                                                    <a href="{% url 'news_detail' post.slug %}">
                                                         <img src="{{ post.image.url }}"
                                                              alt="img">
                                                     </a>
 
-                                                    <a href="{% url 'news_detail' post.id %}"
+                                                    <a href="{% url 'news_detail' post.slug %}"
                                                        class="news_title">{{ post.title }}</a>
                                                 </div>
                                             </div>
@@ -195,13 +195,13 @@
                                     {% for news in inquiries|slice:":1" %}
                                         <div>
                                             <div class="news">
-                                                <a href="{% url 'news_detail' news.id %}">
+                                                <a href="{% url 'news_detail' news.slug %}">
                                                     <img src="{{ news.image.url }}"
                                                          alt="img">
                                                 </a>
 
                                                 <br><br>
-                                                <a href="{% url 'news_detail' news.id %}" class="news_title"
+                                                <a href="{% url 'news_detail' news.slug %}" class="news_title"
                                                    style="font-size: larger; line-height: 35px;">{{ news.title }}</a>
                                             </div>
                                         </div>
@@ -216,14 +216,14 @@
 
                                             <div class="news">
                                                 <div class="col-3">
-                                                    <a href="{% url 'news_detail' post.id %}">
+                                                    <a href="{% url 'news_detail' post.slug %}">
                                                         <img src="{{ post.image.url }}"
                                                              alt="img">
                                                     </a>
 
                                                 </div>
                                                 <div class="col-9" style="margin-top: 13px; margin-left: 11px">
-                                                    <a href="{% url 'news_detail' post.id %}"
+                                                    <a href="{% url 'news_detail' post.slug %}"
                                                        class="news_title">{{ post.title }}</a>
                                                 </div>
                                             </div>
@@ -244,15 +244,15 @@
                                     {% for post in articles %}
                                         <div class="col-4">
                                             <div class="news">
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <img src="{{ post.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' post.id %}" class="news_title"
+                                                <a href="{% url 'news_detail' post.slug %}" class="news_title"
                                                    style="font-size: 15px;">{{ post.title }}</a>
                                                 <br><br>
-                                                <a href="{% url 'news_detail' post.id %}">
+                                                <a href="{% url 'news_detail' post.slug %}">
                                                     <p style="font-size: 14px; font-weight: lighter;">{{ post.short_description }}</p>
                                                 </a>
 
@@ -278,13 +278,13 @@
                                         {% for post in ads %}
                                             <div class="col-3 ">
                                                 <div class="news">
-                                                    <a href="{% url 'news_detail' post.id %}">
+                                                    <a href="{% url 'news_detail' post.slug %}">
                                                         <img src="{{ post.image.url }}"
                                                              alt="img">
                                                     </a>
 
 
-                                                    <a href="{% url 'news_detail' post.id %}"
+                                                    <a href="{% url 'news_detail' post.slug %}"
                                                        class="news_title">{{ post.title }}</a>
                                                 </div>
                                             </div>
@@ -306,12 +306,12 @@
                                     {% for last_video_new in video_news|slice:":1" %}
                                         <div>
                                             <div class="news">
-                                                <a href="{% url 'news_detail' last_video_new.id %}">
+                                                <a href="{% url 'news_detail' last_video_new.slug %}">
                                                     <img src="{{ last_video_new.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' last_video_new.id %}"
+                                                <a href="{% url 'news_detail' last_video_new.slug %}"
                                                    class="news_title">{{ last_video_new.title }}</a>
                                             </div>
                                         </div>
@@ -321,12 +321,12 @@
                                     {% for video_new in video_news|slice:"1:" %}
                                         <div class="col-6">
                                             <div class="news">
-                                                <a href="{% url 'news_detail' video_new.id %}">
+                                                <a href="{% url 'news_detail' video_new.slug %}">
                                                     <img src="{{ video_new.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' video_new.id %}"
+                                                <a href="{% url 'news_detail' video_new.slug %}"
                                                    class="news_title">{{ video_new.title }}</a>
                                             </div>
                                         </div>
@@ -344,12 +344,12 @@
                                     {% for last_photo_new in photo_news|slice:":1" %}
                                         <div>
                                             <div class="news">
-                                                <a href="{% url 'news_detail' last_photo_new.id %}">
+                                                <a href="{% url 'news_detail' last_photo_new.slug %}">
                                                     <img src="{{ last_photo_new.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' last_photo_new.id %}"
+                                                <a href="{% url 'news_detail' last_photo_new.slug %}"
                                                    class="news_title">{{ last_photo_new.title }}</a>
                                             </div>
                                         </div>
@@ -359,12 +359,12 @@
                                     {% for photo_new in photo_news|slice:"1:" %}
                                         <div class="col-6">
                                             <div class="news">
-                                                <a href="{% url 'news_detail' photo_new.id %}">
+                                                <a href="{% url 'news_detail' photo_new.slug %}">
                                                     <img src="{{ photo_new.image.url }}"
                                                          alt="img">
                                                 </a>
 
-                                                <a href="{% url 'news_detail' photo_new.id %}"
+                                                <a href="{% url 'news_detail' photo_new.slug %}"
                                                    class="news_title">{{ photo_new.title }}</a>
                                             </div>
                                         </div>

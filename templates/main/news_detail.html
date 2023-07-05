@@ -21,7 +21,7 @@
                                 <i class="bi bi-calendar4-event"></i>
                                 <span class="mx-1">{{ post.created_at|date:"H:m" }} / {{ post.created_at|date:"d.m.Y" }}</span>
                             </div>
-                            <a href="{% url 'news_detail' post.id %}" style="color: #000000">
+                            <a href="{% url 'news_detail' post.slug %}" style="color: #000000">
                                 <p class="news-lenta_title mt-2" style="font-size: small">{{ post.title }}</p>
                             </a>
 
@@ -49,7 +49,7 @@
                 <p style="color: #c9c8c8">
                     ------------------------------------------------------------------------------------------------------------------------------</p>
                 {% for tag in post_detail.tagmodel_set.all %}
-                    <a href="{% url 'tags' tag.id %}" style="margin-right: 10px;">#{{ tag.name }}</a>
+                    <a href="{% url 'tags' tag.slug 1 %}" style="margin-right: 10px;">#{{ tag.name }}</a>
                 {% endfor %}
             </div>
 
@@ -70,13 +70,13 @@
                             {% for post in ads %}
                                 <div class="col-3 ">
                                     <div class="news">
-                                        <a href="{% url 'news_detail' post.id %}">
+                                        <a href="{% url 'news_detail' post.slug %}">
                                             <img src="{{ post.image.url }}"
                                                  alt="img">
                                         </a>
 
 
-                                        <a href="{% url 'news_detail' post.id %}"
+                                        <a href="{% url 'news_detail' post.slug %}"
                                            class="news_title">{{ post.title }}</a>
                                     </div>
                                 </div>
