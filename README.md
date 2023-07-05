@@ -30,7 +30,7 @@ Home Page:
 
 Filtering by Category:
 
-![Filtering by Category](https://github.com/robiya07/kun_uz/blob/master/main/screenshots/Screenshot%20from%202023-07-04%2018-25-38.png)
+![Filtering by Category](https://github.com/robiya07/kun_uz/blob/master/main/screenshots/Screenshot%20from%202023-07-04%2018-26-12.png)
 
 
 Filtering by Region:
