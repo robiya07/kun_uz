@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d6)vbiim%nwmj^xkth_)i@-&6^_7zbnctws4rwa%ga*(+ogt7%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'hitcount',
-
 ]
 
 MIDDLEWARE = [

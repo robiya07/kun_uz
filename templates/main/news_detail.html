@@ -33,13 +33,14 @@
                 </div>
             </div>
 
+            {% get_hit_count for post_detail as d %}
 
             <div style="width: 700px; border-left: 1px solid #c9c8c8; margin-left: -22px;">
                 <div class="col text-secondary" style="font-size: small">
                     <i class="bi bi-calendar4-event"></i>
                     <span class="mx-1">{{ post_detail.created_at|date:"H:m" }} / {{ post_detail.created_at|date:"d.m.Y" }}</span>
                     <i class="bi bi-eye" style="margin-left: 10px;"></i>
-                    <span class="mx-1">{% get_hit_count for post_detail %}</span>
+                    <span class="mx-1">{{ d }}</span>
                 </div>
 
                 <h4 class="card-title mt-2"><b>{{ post_detail.title }}</b></h4>

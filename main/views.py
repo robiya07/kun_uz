@@ -1,6 +1,10 @@
 from django.db.models import Q
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage
+from hitcount.templatetags.hitcount_tags import get_hit_count
+from hitcount.utils import get_hitcount_model
+from hitcount.views import HitCountMixin
+
 from main.models import CategoryModel, NewsModel, ZoneModel, TagModel
 
 
@@ -98,7 +102,9 @@ def category_view(request, slug):
 def news_detail_view(request, slug):
     news_det = NewsModel.objects.get(slug=slug)
     ads = NewsModel.objects.filter(is_ad=True)[:4]
-    return render(request, 'main/news_detail.html', {'post_detail': news_det, 'ads': ads})
+    hit_count = get_hitcount_model().objects.get_for_object(news_det)
+    hit_count_response = HitCountMixin.hit_count(request, hit_count)
+    return render(request, 'main/news_detail.html', {'post_detail': news_det, 'ads': ads, 'hit_count_obj': hit_count_response})
 
 
 def tags_view(request, slug, page):
@@ -125,3 +131,7 @@ def last_posts(request, page):
         last = paginator.page(paginator.num_pages)
 
     return render(request, 'main/last_posts.html', {'last': last})
+
+
+def custom_404(request, exception):
+    return render(request, 'errors/404.html', status=404)

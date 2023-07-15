@@ -1,7 +1,5 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from hitcount.models import HitCountMixin, HitCount
-from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.text import slugify
 
 
@@ -16,6 +14,7 @@ class ZoneModel(models.Model):
 
     def __str__(self):
         return self.name
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -40,7 +39,6 @@ class CategoryModel(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=300, blank=True)
 
-
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
@@ -48,6 +46,7 @@ class CategoryModel(models.Model):
 
     def __str__(self):
         return self.name
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -86,7 +85,6 @@ class NewsModel(models.Model):
     is_video_news = models.BooleanField(default=False)
     is_photo_news = models.BooleanField(default=False)
     slug = models.SlugField(max_length=300, blank=True)
-    hit_count_generic = GenericRelation(HitCount, object_id_field="id", related_query_name='hit_count_generic_relation')
 
     def save(self, *args, **kwargs):
         if not self.slug:
